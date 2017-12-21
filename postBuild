@@ -14,5 +14,5 @@ else
 fi
 curl -s -L "$url" | tar -xz
 chmod +x geckodriver
-mv geckodriver "$install_dir"
+sudo mv geckodriver "$install_dir"
 echo "installed geckodriver binary in $install_dir"
