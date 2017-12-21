@@ -1,5 +1,6 @@
 .envrc
 .idea/
 */__pycache__
+nb/.ipynb_checkpoints
 __pycache__
 
