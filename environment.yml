@@ -3,6 +3,7 @@ channels:
   - clinicalgraphics
   - conda-forge
   - defaults
+  - anaconda
 dependencies:
   - chromedriver=2.33
   - selenium-chromedriver=2.27
