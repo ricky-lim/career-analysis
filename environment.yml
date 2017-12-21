@@ -10,7 +10,6 @@ dependencies:
   - selenium=3.8.0
   - _nb_ext_conf=0.4.0
   - anaconda-client=1.6.6
-  - appnope=0.1.0
   - asn1crypto=0.23.0
   - beautifulsoup4=4.6.0
   - bleach=2.1.1
