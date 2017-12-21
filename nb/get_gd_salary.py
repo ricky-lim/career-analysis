@@ -18,14 +18,6 @@ class Browser(object):
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.driver.quit()
 
-# def open_chrome():
-#     chrome_options = webdriver.ChromeOptions()
-#     chrome_options.add_argument('--disable-extensions')
-#     chrome_options.add_argument('--profile-directory=Default')
-#     chrome_options.add_argument("--disable-plugins-discovery")
-#     chrome_options.add_argument("--start-maximized")
-#     return webdriver.Chrome(chrome_options=chrome_options)
-
 
 def parse_salary_table(table):
     """
