@@ -4,16 +4,27 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
-CHROME_DRIVER = "/usr/local/bin/chromedriver"
 
+class Browser(object):
+    def __enter__(self):
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--disable-extensions')
+        chrome_options.add_argument('--profile-directory=Default')
+        chrome_options.add_argument("--disable-plugins-discovery")
+        chrome_options.add_argument("--start-maximized")
+        self.driver = webdriver.Chrome(chrome_options=chrome_options)
+        return self.driver
 
-def open_chrome():
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--disable-extensions')
-    chrome_options.add_argument('--profile-directory=Default')
-    chrome_options.add_argument("--disable-plugins-discovery")
-    chrome_options.add_argument("--start-maximized")
-    return webdriver.Chrome(CHROME_DRIVER, chrome_options=chrome_options)
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.driver.quit()
+
+# def open_chrome():
+#     chrome_options = webdriver.ChromeOptions()
+#     chrome_options.add_argument('--disable-extensions')
+#     chrome_options.add_argument('--profile-directory=Default')
+#     chrome_options.add_argument("--disable-plugins-discovery")
+#     chrome_options.add_argument("--start-maximized")
+#     return webdriver.Chrome(chrome_options=chrome_options)
 
 
 def parse_salary_table(table):
@@ -50,12 +61,13 @@ def get_salary_per_page(website):
     :return: a tuple of ( [dict of parsed salary table per page, string website for the next page otherwise None )
     e.g ([{"job_title": "hello", "salary": "0"}], "www.glassdoor.com/next")
     """
-    browser = open_chrome()
-    browser.get(website)
-    html = browser.page_source
-    soup = BeautifulSoup(html, "html.parser")
-    salary_table = soup.find(id="SalarySearchResults").find("div", class_="dataTableModal"). \
-        find("tbody").find_all("tr")
+
+    with Browser() as browser:
+        browser.get(website)
+        html = browser.page_source
+        soup = BeautifulSoup(html, "html.parser")
+        salary_table = soup.find(id="SalarySearchResults").find("div", class_="dataTableModal"). \
+            find("tbody").find_all("tr")
 
     return parse_salary_table(salary_table), get_next(soup)
 
