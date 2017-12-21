@@ -13,5 +13,5 @@ else
 fi
 curl -s -L "$url" | tar -xz
 chmod +x geckodriver
-PATH=$PATH:~
-echo "installed geckodriver binary in $install_dir"
+export PATH=$PATH:${PWD}
+echo "installed geckodriver binary in ${PWD}"
