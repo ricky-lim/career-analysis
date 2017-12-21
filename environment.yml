@@ -5,6 +5,7 @@ channels:
   - defaults
 dependencies:
   - chromedriver=2.33
+  - selenium-chromedriver=2.27
   - selenium=3.8.*
   - beautifulsoup4=4.6.*
   - numpy=1.13.3
